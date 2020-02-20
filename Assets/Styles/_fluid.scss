@@ -1,7 +1,27 @@
+
+// Fluid spacing for project
+$fl-space-xs: 1.5vw;
+$fl-space-sm: 3vw;
+$fl-space-md: 6vw;
+$fl-space-lg: 9vw;
+
+// Fluid font sizing
+// Paragraph
+$fl-p-sm: 3.7vw;
+$fl-p-md: 2.1vw;
+$fl-p-lg: 1.3vw;
+// Headers
+$fl-h3-sm: 6vw;
+$fl-h3-md: 3.5vw;
+$fl-h3-lg: 3vw;
+
+
+
 ///////////////////////////////////////////
 // Media Queries mixin
 $breakpoints: (
-    "phone":        400px,
+    //old
+    /*"phone":        400px,
     "phone-wide":   480px,
     "phablet":      544px,
     "tablet-small": 640px,
@@ -10,7 +30,12 @@ $breakpoints: (
     "tablet-wide":  1024px,
     "desktop":      1200px,
     "desktop-wide": 1600px,
-    "stupid-wide": 2100px
+    "stupid-wide": 2100px*/
+
+    // trials
+    //"small":     0px, // Small is default, not needed for mixin
+    "medium":       768px,
+    "large":       1024px
 );
 @mixin mq($width, $type: min) {
     @if map_has_key($breakpoints, $width) {
@@ -19,6 +44,31 @@ $breakpoints: (
             $width: $width - 1px;
         }
         @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
+
+// Aspect Ratio MQ
+/*
+$type is 'portrait' or 'landscape'
+
+media query mixin looks like this in css:
+
+@include orientation('portrait') {
+    // blah blah blah
+}
+
+*/
+@mixin orientation($type) {
+    @if $type == portrait {
+        @media (max-aspect-ratio: 1/1) {
+            @content;
+        }
+    }
+
+    @if $type == landscape {
+        @media (min-aspect-ratio: 1/1) {
             @content;
         }
     }
