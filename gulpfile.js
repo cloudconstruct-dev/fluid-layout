@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     sass = require("gulp-sass"),
     autoprefixer = require('gulp-autoprefixer'),
     cleanCSS = require("gulp-clean-css");
+    rename = require('gulp-rename');
 
 
 // JS
@@ -32,11 +33,14 @@ gulp.task('sass', gulp.parallel(function() {
 
 // Minify CSS
 gulp.task('minify-css', gulp.parallel(() => {
-    return gulp.src('./Assets/dist/css/*.css')
-      .pipe(sourcemaps.init())
-      .pipe(cleanCSS({compatibility: 'ie8'}))
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest('.'));
+    return gulp.src('./Assets/dist/css/general.css')
+        .pipe(sourcemaps.init())
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(sourcemaps.write())
+        .pipe(rename({
+            suffix: '.min'
+            }))
+        .pipe(gulp.dest('./Assets/dist/css/'));
   }));
 
 // local server for dev
@@ -48,7 +52,6 @@ gulp.task('serve', function() {
       open: true
     }));
 });
-
 
 // Watchers
 gulp.task('watch', gulp.series(function() {
@@ -62,8 +65,7 @@ gulp.task('watch', gulp.series(function() {
 }));
 
 
-
 //gulp.task('default', gulp.series('sass', 'js', 'minify-css', 'serve', 'watch'));
 
 // No JS Task
-gulp.task('default', gulp.series('sass', 'minify-css', 'serve', 'watch'));
+gulp.task('default', gulp.series(['sass', 'minify-css'], gulp.parallel(['serve', 'watch'])));
