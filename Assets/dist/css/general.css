@@ -80,17 +80,45 @@ p {
       font-size: 1.3vw; } }
 
 .fl-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 4;
-  width: 100%; }
+  width: 100%;
+  padding: 3vw;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  @media only screen and (min-width: 768px) {
+    .fl-header {
+      padding: 1.5vw 3vw; } }
   @media (max-aspect-ratio: 1 / 1) {
     .fl-header {
       background: rgba(1, 26, 71, 0.8); } }
   @media (min-aspect-ratio: 1 / 1) {
     .fl-header {
       background: rgba(255, 177, 48, 0.8); } }
+
+.fl-logo {
+  color: white;
+  font-weight: 700;
+  font-size: 1.7vw; }
+  @media only screen and (min-width: 1024px) {
+    .fl-logo {
+      font-size: 1.3vw; } }
+
+.fl-nav__item {
+  display: inline-block;
+  margin: 0 1.5vw;
+  color: white;
+  font-weight: 700;
+  font-size: 1.7vw; }
+  @media only screen and (min-width: 1024px) {
+    .fl-nav__item {
+      font-size: 1.3vw; } }
 
 .fl-footer {
   width: 100%;

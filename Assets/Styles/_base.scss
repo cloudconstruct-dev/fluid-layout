@@ -89,12 +89,20 @@ p {
 }
 
 .fl-header {
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 4;
 
     width: 100%;
+    padding: $fl-space-sm;
+
+    justify-content: space-between;
+
+    @include mq('medium') {
+        padding: $fl-space-xs $fl-space-sm;
+    }
 
     // Testing aspect ratio MQ
     @include orientation('portrait') {
@@ -103,6 +111,38 @@ p {
 
     @include orientation('landscape') {
         background: rgba($fl-color-gold,.8);
+    }
+}
+
+.fl-logo {
+    color: white;
+
+    font-weight: 700;
+    font-size: 1.7vw;
+
+    @include mq('large') {
+        font-size: 1.3vw;
+    }
+}
+
+.fl-nav {
+    &__list {
+        
+    }
+
+    &__item {
+        display: inline-block;
+        
+        margin: 0 $fl-space-xs;
+
+        color: white;
+        
+        font-weight: 700;
+        font-size: 1.7vw;
+
+        @include mq('large') {
+            font-size: 1.3vw;
+        }
     }
 }
 
